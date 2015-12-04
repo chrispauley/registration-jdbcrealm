@@ -1,4 +1,4 @@
-# registration
+# registration-jdbcrealm
 
 This is a java user registration web application supporting JDBCRealm authorization. It uses MySQL database in the backend. It has a data access layer that is generated with an xml schema utilizing jaxb (JSR 222). The MySQL data access objects implement interfaces for CRUD operations. The web front end uses (JSR 315) Servlet 3/JSP 2.2/EL 2.2/JSTL 1.2 within a Tomcat 7 container. A RESTful interface is implemented with JAX-RS (JSR 311). Many of the resources exposed will work with xml and json content types.  
 
@@ -18,7 +18,7 @@ The following environment is expected:
 
 ### Clone the repo
 ````
-git clone https://github.com/chrispauley/registration.git
+git clone https://github.com/chrispauley/registration-jdbcrealm.git
 cd registration
 ````
 

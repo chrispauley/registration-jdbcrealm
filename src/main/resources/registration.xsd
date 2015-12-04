@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.simllc.com/vocabulary/1/1" targetNamespace="http://www.simllc.com/vocabulary/1/1"
+	elementFormDefault="qualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			SIMLL user registration schema version 1.1 - For more
+			information on the
+			vocabulary and this schema, visit
+			http://www.simllc.com/registration/info.html
+        </xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:complexType name="role">
+		<xsd:annotation>
+			<xsd:documentation>
+				Application role. Represents abilities and constraints in the application.
+			</xsd:documentation>
+		</xsd:annotation>
+
+		<xsd:attribute name="roleid" type="xsd:long">
+			<xsd:annotation>
+				<xsd:documentation>
+					Internal id for the role table.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+
+		<xsd:attribute name="name" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					Name of role in the application.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+		<xsd:attribute name="description" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					Description of group in the application.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+
+	</xsd:complexType>
+
+	<xsd:complexType name="user">
+		<xsd:annotation>
+			<xsd:documentation>
+				term documents contain names and values
+			</xsd:documentation>
+		</xsd:annotation>
+
+		<xsd:attribute name="userid" type="xsd:long">
+			<xsd:annotation>
+				<xsd:documentation>
+					Internal id for the user table.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+
+		<xsd:attribute name="email" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					User email. Required for registration.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+
+		<xsd:attribute name="username" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					Optional username.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+
+		<xsd:attribute name="password" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					User password for authentication.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+		<xsd:attribute name="temp_pass" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					Temporary password for password reset.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+		<xsd:attribute name="temp_pass_active" type="xsd:int">
+			<xsd:annotation>
+				<xsd:documentation>
+					Flag to indicate that a temporary password has been issued.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+		<xsd:attribute name="active" type="xsd:int">
+			<xsd:annotation>
+				<xsd:documentation>
+					Flag indicating user account active status.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>		
+		
+		<xsd:attribute name="level_access" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					User account status.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+		<xsd:attribute name="salt" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					Encryption salt value for the password.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+
+		<xsd:attribute name="created_date" type="xsd:dateTime">
+			<xsd:annotation>
+				<xsd:documentation>
+					Date user account created.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+
+		<xsd:attribute name="last_login" type="xsd:dateTime">
+			<xsd:annotation>
+				<xsd:documentation>
+					Date of last login for the user.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>								
+	</xsd:complexType>
+
+	<xsd:complexType name="categoryType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Categories of terms.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Name of the term
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element name="value" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Value of the term
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+
+		<xsd:attribute name="catid" type="xsd:long">
+			<xsd:annotation>
+				<xsd:documentation>
+					Category id for a term.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+
+	</xsd:complexType>
+
+	<xsd:complexType name="group">
+		<xsd:annotation>
+			<xsd:documentation>
+				A group is a collection of users. Groups have roles. Users belong to groups.
+			</xsd:documentation>
+		</xsd:annotation>
+
+		<xsd:attribute name="groupid" type="xsd:long">
+			<xsd:annotation>
+				<xsd:documentation>
+					Id for a group.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+		<xsd:attribute name="name" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					Name of group in the application.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+		<xsd:attribute name="description" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					Description of group in the application.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+
+	</xsd:complexType>
+	
+	<xsd:complexType name="group_member">
+		<xsd:annotation>
+			<xsd:documentation>
+				This is to join users and groups.
+			</xsd:documentation>
+		</xsd:annotation>
+
+		<xsd:attribute name="groupid" type="xsd:long">
+			<xsd:annotation>
+				<xsd:documentation>
+					Id for a group.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+		<xsd:attribute name="userid" type="xsd:long">
+			<xsd:annotation>
+				<xsd:documentation>
+					Id for user.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+
+	</xsd:complexType>
+
+	<xsd:complexType name="role_member">
+	
+		<xsd:annotation>
+			<xsd:documentation>
+				This is to join roles and groups.
+			</xsd:documentation>
+		</xsd:annotation>
+		
+		<xsd:sequence>
+		 <xsd:element name="user"	type="user"	minOccurs="0" maxOccurs="unbounded">
+		  <xsd:annotation>
+		   <xsd:documentation>
+			Users within the group for this role.
+		   </xsd:documentation>
+		  </xsd:annotation>
+		 </xsd:element>
+		 
+	 	</xsd:sequence>
+
+		<xsd:attribute name="roleid" type="xsd:long">
+			<xsd:annotation>
+				<xsd:documentation>
+					Id for a role.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+		<xsd:attribute name="rolename" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					Role Name.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+		<xsd:attribute name="groupid" type="xsd:long">
+			<xsd:annotation>
+				<xsd:documentation>
+					Id for user.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+		<xsd:attribute name="groupname" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					Role Name.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+
+	</xsd:complexType>
+
+	<xsd:complexType name="login_token">
+		<xsd:annotation>
+			<xsd:documentation>
+				Login token. Provides web service token.
+			</xsd:documentation>
+		</xsd:annotation>
+
+		<xsd:attribute name="id" type="xsd:long">
+			<xsd:annotation>
+				<xsd:documentation>
+					Internal id for the user_login_token table.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+
+		<xsd:attribute name="token" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					value for the token.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+		<xsd:attribute name="userid" type="xsd:long">
+			<xsd:annotation>
+				<xsd:documentation>
+					Foreign key to the user table.
+			</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+		<xsd:attribute name="set_time" type="xsd:dateTime">
+			<xsd:annotation>
+				<xsd:documentation>
+					Timestamp for the login token.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>								
+
+
+	</xsd:complexType>
+
+</xsd:schema>

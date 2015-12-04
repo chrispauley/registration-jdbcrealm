@@ -1,0 +1,238 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.simllc</groupId>
+	<artifactId>registration</artifactId>
+	<packaging>war</packaging>
+	<version>1.0</version>
+	<name>User Registration Webapp</name>
+	<url>https://github.com/chrispauley/registration</url>
+	<repositories>
+		<repository>
+			<id>MavenCentral</id>
+			<name>Maven repository</name>
+			<url>http://repo1.maven.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<name>Alternative repo for dependencies</name>
+			<id>java.net</id>
+			<url>http://download.java.net/maven/2</url>
+		</repository>
+		<repository>
+			<id>codehaus</id>
+			<name>Maven Codehaus Repository</name>
+			<url>http://repository.codehaus.org/</url>
+		</repository>
+	</repositories>
+	
+	<properties>
+		<project.build.sourceEncoding>
+				UTF-8
+	    </project.build.sourceEncoding>
+		<project.reporting.outputEncoding>
+				UTF-8
+	    </project.reporting.outputEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jaxb2-basics.version>0.9.4</jaxb2-basics.version>
+		<jaxb.version>2.2.11</jaxb.version>
+		<maven-jaxb2-plugin.version>0.12.3</maven-jaxb2-plugin.version>
+		<w3c-schemas.version>1.0.4</w3c-schemas.version>
+		<jsonix-schema-compiler.version>2.3.3</jsonix-schema-compiler.version>
+		<jsonix.version>2.2.1</jsonix.version>	    
+	</properties>
+	
+	<dependencies>
+		<!-- DAO -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.6</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>mysql-connector-java</artifactId>
+					<groupId>mysql</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+			
+		<!-- (JSR 222) Java Xml Binding 2.0 -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>${jaxb.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>${jaxb.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jvnet.jaxb2.maven2</groupId>
+			<artifactId>maven-jaxb2-plugin</artifactId>
+			<version>0.12.3</version>
+		</dependency>
+		
+		<!-- (JSR 919) -->
+	    <dependency>
+			 <groupId>javax.mail</groupId>
+			 <artifactId>mail</artifactId>
+			 <version>1.4.3</version>
+		</dependency>
+		
+		<!-- (JSR 315) Servlet 3/JSP 2.2/EL 2.2/JSTL 1.2 On Tomcat 7 -->		
+		<dependency>
+		  <groupId>javax.servlet</groupId>
+		  <artifactId>javax.servlet-api</artifactId>
+		  <version>3.0.1</version>
+		  <scope>provided</scope>
+		</dependency>	  	 
+	    <dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+		<groupId>org.glassfish.web</groupId>
+			<artifactId>jstl-impl</artifactId>
+			<version>1.2</version>
+			<scope>provided</scope>
+		</dependency>	 
+	    	    
+	    <!-- JAX-RS (JSR 311) -->
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>1.13</version>
+		</dependency>
+		<dependency>
+		      <groupId>com.sun.jersey</groupId>
+		      <artifactId>jersey-servlet</artifactId>
+		      <version>1.13</version>
+		 </dependency>	
+		<dependency>
+		    <groupId>com.sun.jersey.contribs</groupId>
+		    <artifactId>jersey-multipart</artifactId>
+		    <version>1.13</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.sun.jersey</groupId>
+		    <artifactId>jersey-json</artifactId>
+		    <version>1.13</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.8</version>
+		</dependency>
+		
+		<!-- Security tags: javax.annotation.security.* 
+		     (@RolesAllowed, @PermitAll, @DenyAll etc.)  -->
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>jsr250-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.7</version>
+		</dependency>
+				
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		
+	</dependencies>
+	<build>
+		<finalName>registration</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<configuration>
+						<outputDirectory>target-eclipse</outputDirectory>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>jaxb2-maven-plugin</artifactId>
+					<version>2.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<!-- JAXB xjc plugin that invokes the xjc compiler to compile XML schema 
+				into Java classes. -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- The schema directory or xsd files. -->
+					<schemaDirectory>src/main/resources</schemaDirectory>
+					<bindingDirectory>src/main/resources</bindingDirectory>
+					<!-- The package in which the source files will be generated. -->
+					<packageName>com.simllc.registration.model</packageName>
+					<!-- The working directory to create the generated java source files. -->
+					<outputDirectory>target/gen-src</outputDirectory>
+					<strict>false</strict>
+					<extension>true</extension>
+				</configuration>
+			</plugin>
+		</plugins>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>target/gen-src</directory>
+				<includes>
+					<include>**/*.java</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+	<description>This is a user registration and login web application that uses a database with roles and groups. </description>
+</project>
