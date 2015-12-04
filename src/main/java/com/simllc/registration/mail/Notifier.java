@@ -50,7 +50,7 @@ public class Notifier {
 			props.put("mail.smtps.auth", "true");
 			Session session = Session.getInstance(props, null);
 			Message msg = new MimeMessage(session);
-			msg.setFrom(new InternetAddress("pauley.chris@gmail.com"));
+			msg.setFrom(new InternetAddress("change-this-name@example.com"));
 			;
 			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(
 					"sample-recipient@example.com", false));
